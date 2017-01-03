@@ -21,6 +21,9 @@ this.refreshHTML=function(){
 
 this.move=function(){
 	this.marker++;
+	if (this.marker==this.keys.length){
+		this.marker=0;
+	}	
 //needs to speak here as well. 
 }
 

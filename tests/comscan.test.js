@@ -35,11 +35,27 @@ it('The highlight can be moved twice and the value there is 43', function(){
 	hope= document.getElementById('listtable')
 	expect(board.getHighlight()).toBe(43)
 });
+
+
+it('The highlight can be moved six and the value there is 43 because it wraps around', function(){
+	board=new Board(testBoardA());
+	board.move()
+	board.move()
+	board.move()
+	board.move()
+	board.move()
+	board.move()
+	hope= document.getElementById('listtable')
+	expect(board.getHighlight()).toBe(43)
+});
+
+
+
 });
 
 function testBoardA()
 {
-return [4, 5, 43, 8, 3 , 2 ];
+return [4, 5, 43, 8 ];
 
 
 }
