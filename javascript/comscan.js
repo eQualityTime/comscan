@@ -3,22 +3,25 @@ window.comscan = window.comscan || {};
 
 
 function Board(input) { 
-this.keys=input
+this.marker=0;
+this.keys=input;
 
 this.getHighlight= function(){
-return this.keys[0];
+return this.keys[this.marker];
 };
 
 
 this.refreshHTML=function(){
-
-listtable= document.getElementById('listtable');
-
-for (i=0;i<this.keys.length;i++)
-{
-listtable.innerHTML+="<tr><td>"+this.keys[i]+"</tr></td>"
+	listtable= document.getElementById('listtable');
+	for (i=0;i<this.keys.length;i++)
+	{
+		listtable.innerHTML+="<tr><td>"+this.keys[i]+"</tr></td>";
+	}
 }
 
+this.move=function(){
+	this.marker++;
+//needs to speak here as well. 
 }
 
 } 

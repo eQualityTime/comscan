@@ -21,21 +21,25 @@ var	board=new Board(testBoardA());
   });
 
 
-it('The html table has the number 4 as first value', function(){
-
-board=new Board(testBoardA());
-board.refreshHTML();
-hope= document.getElementById('listtable')
-expect(hope.innerHTML.includes("4"))
-
-
+it('The html table has the number 43 in it', function(){
+	board=new Board(testBoardA());
+	board.refreshHTML();
+	hope= document.getElementById('listtable')
+	expect(hope.innerHTML.includes("43")).toBe(true)
 });
 
+it('The highlight can be moved twice and the value there is 43', function(){
+	board=new Board(testBoardA());
+	board.move()
+	board.move()
+	hope= document.getElementById('listtable')
+	expect(board.getHighlight()).toBe(43)
+});
 });
 
 function testBoardA()
 {
-return [4, 5, 7, 8, 3 , 2 ];
+return [4, 5, 43, 8, 3 , 2 ];
 
 
 }
