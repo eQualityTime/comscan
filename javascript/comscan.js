@@ -37,13 +37,23 @@ function Board(inGraph, links) {
 
     this.activate = function() {
 	dest=this.getHighlightedNode().link 
+	alert(dest)
 	if(dest in this.graph){
 		this.currentNode=this.graph[dest]
 		this.childIndex=0;//start the new page at the begining
 		this.refreshHTML()//new page
 	}	
-	else
-	{
+	else if(dest.indexOf("ovf(")!=-1){
+	    if(dest.indexOf("back")!=-1){
+		this.currentNode=this.graph[0]
+		this.childIndex=0;//start the new page at the begining
+		this.refreshHTML()//new page
+		return
+}
+
+	}
+	else {
+
 		alert("Stub!");
 	}
 
