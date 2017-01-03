@@ -239,23 +239,37 @@ function testBoardA() {
 }
 
 function getCK12Board(){
-
+//console.log("Enter CK12 parse function")
 //starting with CK12Raw, we're going to build outselves a board. 
+pagesGraph={}
+console.log(Object.keys(CK12Raw['Grid']).length)
+for (i =0;i<Object.keys(CK12Raw['Grid']).length;i++){
+	singlepage=CK12Raw['Grid'][""+i]
+	pagename=singlepage[0]
+//	console.log("At page: "+pagename)
+	pagesGraph[pagename]=parseOVFPage(singlepage)
+//	console.log("here")	
+}
 
-pagesGraph=parseOVFPage(CK12Raw['Grid']['0'])
-return new Board(pagesGraph)
+board=new Board(pagesGraph)
+board.rootNodeID="toppage"
+board.currentNode = board.graph["toppage"] 
+return board
 
 }
 
 function parseOVFPage(singlePage){
+//console.log("in single page parse")
 itemList=[];
+var i=0
+var j=0
 for(i=0;i<4;i++){
 	for(j=0;j<4;j++){
 		itemList.push(new MenuItem(i+j,singlePage[1][i][j],singlePage[3][i][j],singlePage[1][i][j]))
 
 	}
 }
-return {0: itemList}
+return itemList
 
 }
 
