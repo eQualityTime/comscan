@@ -77,19 +77,20 @@ describe('Comscan', function() {
     });
 
 
-   it('sucessfully deals with three level graphs', function() {
+   it('The back button takes us to the start from the second level', function() {
         board = testBoardA();
         board.move()
         board.move()
         board.activate()
         board.move()
         board.move()
+        board.move()
         board.activate()
-        expect(board.getHighlightedNodeLabel()).toBe(99)
+        expect(board.getHighlightedNodeLabel()).toBe(4)
     });
 
 
-    it('has a back commands that returns us to the first page', function() {
+    it('sucessfully deals with three level graphs', function() {
         board = testBoardA();
         board.move()
         board.move()
@@ -100,6 +101,19 @@ describe('Comscan', function() {
         expect(board.getHighlightedNodeLabel()).toBe(29)
     });
 
+ it('The back button takes us to the second level from the third', function() {
+        board = testBoardA();
+        board.move()
+        board.move()
+        board.activate()
+        board.move()
+        board.move()
+        board.activate()
+        board.move()
+        board.move()
+        board.move()
+        expect(board.getHighlightedNodeLabel()).toBe(99)
+    });
 
 
 
