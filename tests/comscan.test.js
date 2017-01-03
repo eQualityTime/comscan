@@ -184,18 +184,24 @@ describe('Comscan', function() {
         expect(board.getHighlightedNodeLabel()).toBe("do")
     });
 
-//
-//   it('The back button takes us to the start from the second level', function() {
-//        board = getCK12Board();
-//        board.move()
-//        board.move()
-//        board.activate()
-//        board.move()
-//        board.move()
-//        board.move()
-//        board.activate()
-//        expect(board.getHighlightedNodeID()).toBe(4)
-//    });
+
+ it('The back button takes us to the start from the second level', function() {
+      board = getCK12Board();
+        board.move()
+        board.move()
+        board.activate()//go to action words
+	for(i=0;i<4;i++){
+		for(j=0;j<4;j++){
+        board.move()
+	}
+	}
+
+      board.move()
+      board.activate()//go back
+      board.move()//move to somewhere we can tell where we are
+      board.move()
+      expect(board.getHighlightedNodeLabel()).toBe("Action Words")
+  });
 //
 //
 //    it('sucessfully deals with three level graphs', function() {
