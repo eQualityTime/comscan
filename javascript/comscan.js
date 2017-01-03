@@ -7,9 +7,11 @@ function say(message) {
 
 function Board(inGraph, links) {
     //This is a spider that walks thought the pages digraph
+    rootNodeID=0
     this.childIndex = 0;
     this.graph = inGraph;
-    this.currentNode = this.graph[0] //default
+    this.currentNode = this.graph[rootNodeID] //default
+    this.backStack=[]
 
     this.getHighlightedNode= function() {
 	    return this.currentNode[this.childIndex];
@@ -37,6 +39,7 @@ function Board(inGraph, links) {
         if (this.childIndex == this.currentNode.length) {
             this.childIndex = 0;
         }
+	console.log("Now at: "+this.currentNode[this.childIndex].utterance);
         say(this.currentNode[this.childIndex].utterance);
         //needs to speak here as well. 
         this.refreshHTML()
@@ -49,10 +52,19 @@ function Board(inGraph, links) {
 		this.currentNode=this.graph[dest]
 		this.childIndex=0;//start the new page at the begining
 		this.refreshHTML()//new page
+		this.backStack.push(dest)
+		console.log("pushed onto the stack: "+dest)
 	}	
 	else if(dest.indexOf("ovf(")!=-1){
 	    if(dest.indexOf("back")!=-1){
-		this.currentNode=this.graph[0]
+		this.backStack.pop()//this will be the current page we pop off
+		lastNodeID=this.backStack[this.backStack.length-1]//this the the page below that we peek at:
+		if (lastNodeID==undefined)
+{
+lastNodeID=rootNodeID
+}	
+		console.log("Pulled from stack: "+lastNodeID)
+		this.currentNode=this.graph[lastNodeID]
 		this.childIndex=0;//start the new page at the begining
 		this.refreshHTML()//new page
 		return

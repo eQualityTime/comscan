@@ -112,6 +112,7 @@ describe('Comscan', function() {
         board.move()
         board.move()
         board.move()
+	board.activate()
         expect(board.getHighlightedNodeLabel()).toBe(99)
     });
 
