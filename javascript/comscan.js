@@ -32,7 +32,7 @@ function Board(inGraph, links) {
     }
 
     this.move = function() {
-	console.log("pressed!")
+	console.log("Move Function Activated")
         this.childIndex++;
         if (this.childIndex == this.currentNode.length) {
             this.childIndex = 0;
@@ -44,7 +44,7 @@ function Board(inGraph, links) {
 
     this.activate = function() {
 	dest=this.getHighlightedNode().link 
-	alert(dest)
+	console.log("Give this destination: "+dest)
 	if(dest in this.graph){
 		this.currentNode=this.graph[dest]
 		this.childIndex=0;//start the new page at the begining

@@ -76,6 +76,19 @@ describe('Comscan', function() {
         expect(board.getHighlightedNodeLabel()).toBe(99)
     });
 
+
+   it('sucessfully deals with three level graphs', function() {
+        board = testBoardA();
+        board.move()
+        board.move()
+        board.activate()
+        board.move()
+        board.move()
+        board.activate()
+        expect(board.getHighlightedNodeLabel()).toBe(99)
+    });
+
+
     it('has a back commands that returns us to the first page', function() {
         board = testBoardA();
         board.move()
@@ -83,9 +96,8 @@ describe('Comscan', function() {
         board.activate()
 	board.move()
 	board.move()
-	board.move()
 	board.activate()
-        expect(board.getHighlightedNodeLabel()).toBe(4)
+        expect(board.getHighlightedNodeLabel()).toBe(29)
     });
 
 
@@ -101,7 +113,8 @@ function testBoardA() {
 
     pagesGraph = {
         0: [new MenuItem(4,"", "Bashful"), new MenuItem(5,"", "Happy"), new MenuItem(43,"A", "Animals"), new MenuItem(8,"", "Frederick")],
-        "A": [new MenuItem(99,"", "Apple"), new MenuItem(2,"", "Ant"), new MenuItem(6,"", "Answer"), new MenuItem("Back","ovf(back())", "")]
+        "A": [new MenuItem(99,"", "Apple"), new MenuItem(2,"", "Ant"), new MenuItem(6,"B", "B page"), new MenuItem("Back","ovf(back())", "")],
+        "B": [new MenuItem(29,"", "Baby"), new MenuItem(22,"", "Bot"), new MenuItem(26,"", "Boat"), new MenuItem("Back","ovf(back())", "")]
     }
 
     return new Board(pagesGraph);
