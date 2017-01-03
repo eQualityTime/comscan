@@ -16,20 +16,20 @@ describe('Comscan', function() {
   // call the init function of calculator to register DOM elements
 
   it('The board, loaded with test values, shoudl have an initial highlight value of 4', function() {
-var	board=new Board(testBoardA());
+	board=testBoardA();
 	expect(board.getHighlight()).toBe(4);
   });
 
 
 it('The html table has the number 43 in it', function(){
-	board=new Board(testBoardA());
+	board=testBoardA();
 	board.refreshHTML();
 	hope= document.getElementById('listtable')
 	expect(hope.innerHTML.includes("43")).toBe(true)
 });
 
 it('The highlight can be moved twice and the value there is 43', function(){
-	board=new Board(testBoardA());
+	board=testBoardA();
 	board.move()
 	board.move()
 	hope= document.getElementById('listtable')
@@ -38,7 +38,7 @@ it('The highlight can be moved twice and the value there is 43', function(){
 
 
 it('The highlight can be moved six and the value there is 43 because it wraps around', function(){
-	board=new Board(testBoardA());
+	board=testBoardA();
 	board.move()
 	board.move()
 	board.move()
@@ -51,11 +51,21 @@ it('The highlight can be moved six and the value there is 43 because it wraps ar
 
 
 
+it('the highlight calls a speech function each time it is moved', function(){
+	board=testBoardA();
+	spyOn(window, "say");
+	board.move()
+	expect(say).toHaveBeenCalled();
+});
+
+
+
+
 });
 
 function testBoardA()
 {
-return [4, 5, 43, 8 ];
+return new Board([4, 5, 43, 8 ],["Bashful", "Happy", "Leaslal", "Frederick"]);
 
 
 }

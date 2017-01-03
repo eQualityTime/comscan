@@ -2,9 +2,10 @@
 window.comscan = window.comscan || {};
 
 
-function Board(input) { 
+function Board(inkeys,inutterances) { 
 this.marker=0;
-this.keys=input;
+this.keys=inkeys;
+this.utterances=inutterances;
 
 this.getHighlight= function(){
 return this.keys[this.marker];
@@ -24,9 +25,16 @@ this.move=function(){
 	if (this.marker==this.keys.length){
 		this.marker=0;
 	}	
+say(this.utterances[this.marker]);
 //needs to speak here as well. 
 }
 
 } 
+
+
+function say(message){
+//alert("say what you want!")//stup
+
+}
 
 
