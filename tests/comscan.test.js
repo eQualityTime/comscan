@@ -77,13 +77,17 @@ it('activating the third button takes us to a new page starting with 99', functi
 	expect(board.getHighlight()).toBe(99)
 });
 
+//here
+
 
 
 });
 
 function testBoardA()
 {
-return new Board([4, 5, 43, 8 ],{"4":"Bashful", "5": "Happy", "43": "Animals", "8": "Frederick"});
+pagesGraph={0: [4,5,43,8], 43: [99,2,4,-1]}
+
+return new Board(pagesGraph,{"4":"Bashful", "5": "Happy", "43": "Animals", "8": "Frederick"});
 
 
 }
