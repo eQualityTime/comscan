@@ -56,6 +56,16 @@ it('the highlight calls a speech function each time it is moved', function(){
 	spyOn(window, "say");
 	board.move()
 	expect(say).toHaveBeenCalled();
+//learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
+});
+
+
+
+it('calls the speech function with the right argument each time it is moved', function(){
+	board=testBoardA();
+	spyOn(window, "say");
+	board.move()
+	expect(say).toHaveBeenCalledWith("Happy");
 });
 
 
