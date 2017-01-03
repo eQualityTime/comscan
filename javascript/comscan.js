@@ -20,16 +20,24 @@ function Board(inGraph, links) {
         return this.getHighlightedNode().label;
     };
 
+this.getHighlightedNodeID = function() {
+        return this.getHighlightedNode().id;
+    };
+
+
 
     this.refreshHTML = function() {
+	console.log("Entering refreshHTML")
         listtable = document.getElementById('listtable');
 	listtable.innerHTML=""
         for (child = 0; child < this.currentNode.length; child++) {
+	    console.log("Here")
 	    if (child==this.childIndex){
             listtable.innerHTML += "<tr><td style= \"color:red\">" + this.currentNode[child].label + "</tr></td>";
 	}else{
             listtable.innerHTML += "<tr><td>" + this.currentNode[child].label + "</tr></td>";
 	}
+
 	}
     }
 
@@ -82,7 +90,8 @@ lastNodeID=rootNodeID
 }//end Board class
 
 
-function MenuItem(inlabel, inlink, inUtterance){
+function MenuItem(inid,inlabel, inlink, inUtterance){
+this.id=inid
 this.label=inlabel
 this.link=inlink
 this.utterance=inUtterance||inlabel
