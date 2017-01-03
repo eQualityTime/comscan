@@ -25,8 +25,15 @@ this.move=function(){
 	if (this.marker==this.keys.length){
 		this.marker=0;
 	}	
-say(this.utterances[this.marker]);
+say(this.utterances[this.keys[this.marker]]);
 //needs to speak here as well. 
+}
+
+this.activate=function(){
+///here
+
+
+
 }
 
 } 

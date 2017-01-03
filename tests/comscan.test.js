@@ -69,13 +69,21 @@ it('calls the speech function with the right argument each time it is moved', fu
 });
 
 
+it('activating the third button takes us to a new page starting with 99', function(){
+	board=testBoardA();
+	board.move()
+	board.move()
+	board.activate()
+	expect(board.getHighlight()).toBe(99)
+});
+
 
 
 });
 
 function testBoardA()
 {
-return new Board([4, 5, 43, 8 ],["Bashful", "Happy", "Leaslal", "Frederick"]);
+return new Board([4, 5, 43, 8 ],{"4":"Bashful", "5": "Happy", "43": "Animals", "8": "Frederick"});
 
 
 }
