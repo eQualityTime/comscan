@@ -7,35 +7,45 @@ function say(message) {
 
 function Board(inGraph, links) {
     //This is a spider that walks thought the pages digraph
-    this.node = 0 //default
     this.childIndex = 0;
     this.graph = inGraph;
-    this.getCurrentNode = function() {
-        return this.graph[this.node]
+    this.currentNode = this.graph[0] //default
+
+    this.getHighlightedNode= function() {
+	    return this.currentNode[this.childIndex];
     }
-    this.getHighlight = function() {
-        return this.getCurrentNode()[this.childIndex].label;
+    this.getHighlightedNodeLabel = function() {
+        return this.getHighlightedNode().label;
     };
 
 
     this.refreshHTML = function() {
         listtable = document.getElementById('listtable');
-        for (child = 0; child < this.getCurrentNode().length; child++) {
-            listtable.innerHTML += "<tr><td>" + this.getCurrentNode()[child].label + "</tr></td>";
+        for (child = 0; child < this.currentNode.length; child++) {
+            listtable.innerHTML += "<tr><td>" + this.currentNode[child].label + "</tr></td>";
         }
     }
 
     this.move = function() {
         this.childIndex++;
-        if (this.childIndex == this.getCurrentNode().length) {
+        if (this.childIndex == this.currentNode.length) {
             this.childIndex = 0;
         }
-        say(this.getCurrentNode()[this.childIndex].utterance);
+        say(this.currentNode[this.childIndex].utterance);
         //needs to speak here as well. 
     }
 
     this.activate = function() {
-		
+	dest=this.getHighlightedNode().link 
+	if(dest in this.graph){
+		this.currentNode=this.graph[dest]
+		this.childIndex=0;//start the new page at the begining
+		this.refreshHTML()//new page
+	}	
+	else
+	{
+		alert("Stub!");
+	}
 
 
     }

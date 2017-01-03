@@ -16,7 +16,7 @@ describe('Comscan', function() {
 
     it('The board, loaded with test values, shoudl have an initial highlight value of 4', function() {
         board = testBoardA();
-        expect(board.getHighlight()).toBe(4);
+        expect(board.getHighlightedNodeLabel()).toBe(4);
     });
 
 
@@ -32,7 +32,7 @@ describe('Comscan', function() {
         board.move()
         board.move()
         hope = document.getElementById('listtable')
-        expect(board.getHighlight()).toBe(43)
+        expect(board.getHighlightedNodeLabel()).toBe(43)
     });
 
 
@@ -45,7 +45,7 @@ describe('Comscan', function() {
         board.move()
         board.move()
         hope = document.getElementById('listtable')
-        expect(board.getHighlight()).toBe(43)
+        expect(board.getHighlightedNodeLabel()).toBe(43)
     });
 
 
@@ -73,7 +73,7 @@ describe('Comscan', function() {
         board.move()
         board.move()
         board.activate()
-        expect(board.getHighlight()).toBe(99)
+        expect(board.getHighlightedNodeLabel()).toBe(99)
     });
 
     //here
