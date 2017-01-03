@@ -141,27 +141,27 @@ describe('Comscan', function() {
 	console.log(hope.innerHTML)
         expect(hope.innerHTML.includes("Care")).toBe(true)
     });
-//
-//    it('The highlight can be moved twice and the value there is 43', function() {
-//        board = getCK12Board();
-//        board.move()
-//        board.move()
-//        hope = document.getElementById('listtable')
-//        expect(board.getHighlightedNodeID()).toBe(43)
-//    });
-//
-//
-//    it('The highlight can be moved six and the value there is 43 because it wraps around', function() {
-//        board = getCK12Board();
-//        board.move()
-//        board.move()
-//        board.move()
-//        board.move()
-//        board.move()
-//        board.move()
-//        hope = document.getElementById('listtable')
-//        expect(board.getHighlightedNodeID()).toBe(43)
-//    });
+
+    it('The highlight can be moved twice and the value there is 43', function() {
+        board = getCK12Board();
+        board.move()
+        board.move()
+        hope = document.getElementById('listtable')
+        expect(board.getHighlightedNodeLabel()).toBe("Action words")
+    });
+
+
+    it('The highlight can be moved six and the value there is 43 because it wraps around', function() {
+        board = getCK12Board();
+	for(i=0;i<4;i++){
+		for(j=0;j<4;j++){
+        board.move()
+	}
+	}
+
+        hope = document.getElementById('listtable')
+        expect(board.getHighlightedNodeLabel()).toBe("Yes")
+    });
 //
 //
 //
