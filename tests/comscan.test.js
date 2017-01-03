@@ -162,35 +162,28 @@ describe('Comscan', function() {
         hope = document.getElementById('listtable')
         expect(board.getHighlightedNodeLabel()).toBe("Yes")
     });
-//
-//
-//
-//    it('the highlight calls a speech function each time it is moved', function() {
-//        board = getCK12Board();
-//        spyOn(window, "say");
-//        board.move()
-//        expect(say).toHaveBeenCalled();
-//        //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
-//    });
-//
-//
-//
-//    it('calls the speech function with the right argument each time it is moved', function() {
-//        board = getCK12Board();
-//        spyOn(window, "say");
-//        board.move()
-//        expect(say).toHaveBeenCalledWith("Happy");
-//    });
-//
-//
-//    it('activating the third button takes us to a new page starting with 99', function() {
-//        board = getCK12Board();
-//        board.move()
-//        board.move()
-//        board.activate()
-//        expect(board.getHighlightedNodeID()).toBe(99)
-//    });
-//
+
+
+
+   it('the highlight calls a speech function each time it is moved', function() {
+       board = getCK12Board();
+       spyOn(window, "say");
+       board.move()
+       expect(say).toHaveBeenCalled();
+       //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
+   });
+
+
+    it('Testing CK12 link to action words', function() {
+        board = getCK12Board();
+        board.move()
+        board.move()
+        board.activate()
+        board.move()
+        board.move()
+        expect(board.getHighlightedNodeLabel()).toBe("do")
+    });
+
 //
 //   it('The back button takes us to the start from the second level', function() {
 //        board = getCK12Board();
@@ -249,7 +242,7 @@ function getCK12Board(){
 
 //starting with CK12Raw, we're going to build outselves a board. 
 
-pagesGraph={0: parseOVFPage(CK12Raw['Grid']['0'])}
+pagesGraph=parseOVFPage(CK12Raw['Grid']['0'])
 return new Board(pagesGraph)
 
 }
@@ -262,7 +255,7 @@ for(i=0;i<4;i++){
 
 	}
 }
-return itemList
+return {0: itemList}
 
 }
 

@@ -31,7 +31,6 @@ this.getHighlightedNodeID = function() {
         listtable = document.getElementById('listtable');
 	listtable.innerHTML=""
         for (child = 0; child < this.currentNode.length; child++) {
-	    console.log("Here")
 	    if (child==this.childIndex){
             listtable.innerHTML += "<tr><td style= \"color:red\">" + this.currentNode[child].label + "</tr></td>";
 	}else{
