@@ -27,9 +27,8 @@ function Board(inGraph, links) {
             listtable.innerHTML += "<tr><td style= \"color:red\">" + this.currentNode[child].label + "</tr></td>";
 	}else{
             listtable.innerHTML += "<tr><td>" + this.currentNode[child].label + "</tr></td>";
-}
-	
-        }
+	}
+	}
     }
 
     this.move = function() {

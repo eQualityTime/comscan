@@ -17,9 +17,10 @@ board= new Board(pagesGraph);
 
 board.refreshHTML();
 
+setInterval(function(){board.move()},1000);
 </script>
-<button onclick="board.move()">Press!</button>
 </table>
 
+<button onclick="board.activate()">Activate!</button>
 </body>
 </html>
