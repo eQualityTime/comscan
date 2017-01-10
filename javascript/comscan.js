@@ -5,22 +5,30 @@ function say(message) {
 
 }
 
-function Board(inGraph, links) {
-    //This is a spider that walks thought the pages digraph
-    rootNodeID=0
-    this.childIndex = 0;
-    this.graph = inGraph;
-    this.currentNode = this.graph[rootNodeID] //default
-    this.backStack=[]
+
+function MenuItem(inid,inlabel, inlink, inUtterance){
+//Holds the information for a single unit that can be activated. 
+	this.id=inid
+	this.label=inlabel
+	this.link=inlink
+	this.utterance=inUtterance||inlabel
+}
+
+function PagesIterator(targetGraph) {
+    this.rootNodeID=0
+    this.childIndex = 0;//initialisation
+    this.graph = targetGraph;//currently a dictionary of node IDs to lists of attributes. 
+    this.currentNode = this.graph[this.rootNodeID]
+    this.backStack=[];//stores breadcrumbs to work a multi-level 'back' button. 
 
     this.getHighlightedNode= function() {
-	    return this.currentNode[this.childIndex];
+	    return this.currentNode[this.childIndex];//returns a list of MenuItem objects
     }
     this.getHighlightedNodeLabel = function() {
         return this.getHighlightedNode().label;
     };
 
-this.getHighlightedNodeID = function() {
+    this.getHighlightedNodeID = function() {
         return this.getHighlightedNode().id;
     };
 
@@ -67,9 +75,9 @@ this.getHighlightedNodeID = function() {
 		this.backStack.pop()//this will be the current page we pop off
 		lastNodeID=this.backStack[this.backStack.length-1]//this the the page below that we peek at:
 		if (lastNodeID==undefined)
-{
-lastNodeID=rootNodeID
-}	
+		{
+			lastNodeID=this.rootNodeID
+		}	
 		console.log("Pulled from stack: "+lastNodeID)
 		this.currentNode=this.graph[lastNodeID]
 		this.childIndex=0;//start the new page at the begining
@@ -89,10 +97,3 @@ lastNodeID=rootNodeID
 }//end Board class
 
 
-function MenuItem(inid,inlabel, inlink, inUtterance){
-this.id=inid
-this.label=inlabel
-this.link=inlink
-this.utterance=inUtterance||inlabel
-
-}
