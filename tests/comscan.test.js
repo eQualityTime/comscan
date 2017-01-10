@@ -202,7 +202,10 @@ describe('Comscan', function() {
       expect(iterator.getHighlightedNodeLabel()).toBe("Action words")
   });
 
-it('sucessfully deals with three level graphs', function() {
+
+
+
+it('sucessfully takes us from the third level to the second.', function() {
       iterator = getCK12iterator();
       iterator.move()
       iterator.move()
@@ -224,24 +227,6 @@ it('sucessfully deals with three level graphs', function() {
 
   });
 
-
-
-// it('The back button takes us to the second level from the third', function() {
-//        iterator = getCK12iterator();
-//        iterator.move()
-//        iterator.move()
-//        iterator.activate()
-//        iterator.move()
-//        iterator.move()
-//        iterator.activate()
-//        iterator.move()
-//        iterator.move()
-//        iterator.move()
-//	iterator.activate()
-//        expect(iterator.getHighlightedNodeID()).toBe(99)
-//    });
-//
-//
 
 
 });
