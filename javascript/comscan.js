@@ -2,8 +2,13 @@ window.comscan = window.comscan || {};
 
 function say(message) {
     //alert("say what you want!")//stup
+	var utterance = new SpeechSynthesisUtterance(message);
+	if (utterance.voice == null){
+		utterance.voice=speechSynthesis.getVoices().filter(function(voice) { return voice.name == "Daniel"; })[0];
+	}
+	window.speechSynthesis.speak(utterance);
+    }
 
-}
 
 
 function MenuItem(inid, inlabel, inlink, inUtterance) {
@@ -73,20 +78,20 @@ function PagesIterator(targetGraph) {
             return
         } //a different OVF command
         alert("stub!");
+    }
+
+
+    this.activate = function() {
+        dest = this.getHighlightedNode().link
+        if (dest in this.graph) {
+            this.jump(dest)
+            this.backStack.push(dest)
+        } else if (dest.indexOf("ovf(") != -1) {
+            this.processOVF(dest)
+        } else { //some failed linkk
+            alert("Stub!");
         }
 
+    }
 
-        this.activate = function() {
-            dest = this.getHighlightedNode().link
-            if (dest in this.graph) {
-                this.jump(dest)
-                this.backStack.push(dest)
-            } else if (dest.indexOf("ovf(") != -1) {
-                this.processOVF(dest)
-            } else { //some failed linkk
-                alert("Stub!");
-            }
-
-        }
-
-    } //end Board class
+} //end Board class
