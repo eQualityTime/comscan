@@ -39,7 +39,7 @@ function PagesIterator(targetGraph) {
 
 
     this.refreshHTML = function() {
-        listtable = document.getElementById('listtable');
+        var listtable = document.getElementById('listtable');
         listtable.innerHTML = ""
         for (child = 0; child < this.currentNode.length; child++) {
             html = "<td>"
@@ -82,7 +82,7 @@ function PagesIterator(targetGraph) {
 
 
     this.activate = function() {
-        dest = this.getHighlightedNode().link
+        var dest = this.getHighlightedNode().link
         if (dest in this.graph) {
             this.jump(dest)
             this.backStack.push(dest)
