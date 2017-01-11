@@ -63,7 +63,7 @@ function PagesIterator(targetGraph) {
         if (this.childIndex == this.currentNode.length) {
             this.childIndex = 0;
         }
-        say(this.currentNode[this.childIndex].utterance);
+        think(this.currentNode[this.childIndex].utterance);
         this.refreshHTML()
     }
 

@@ -61,11 +61,11 @@ describe('Comscan', function() {
 
 
 
-    it('calls the speech function with the right argument each time it is moved', function() {
+    it('calls the think function with the right argument each time it is moved', function() {
         iterator = testiteratorA();
-        spyOn(window, "say");
+        spyOn(window, "think");
         iterator.move()
-        expect(say).toHaveBeenCalledWith("Happy");
+        expect(think).toHaveBeenCalledWith("Happy");
     });
 
 
@@ -163,15 +163,6 @@ describe('Comscan', function() {
         expect(iterator.getHighlightedNodeLabel()).toBe("Yes")
     });
 
-
-
-    it('the highlight calls a speech function each time it is moved', function() {
-        iterator = getCK12iterator();
-        spyOn(window, "say");
-        iterator.move()
-        expect(say).toHaveBeenCalled();
-        //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
-    });
 
 
 
