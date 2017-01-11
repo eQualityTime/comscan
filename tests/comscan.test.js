@@ -17,7 +17,7 @@ describe('Comscan', function() {
 
     it('The iterator, loaded with test values, shoudl have an initial highlight value of 4', function() {
         iterator = testiteratorA();
-        expect(iterator.getHighlightedNodeID()).toBe(4);
+        expect(iterator.getHighlightedItemID()).toBe(4);
     });
 
 
@@ -30,23 +30,23 @@ describe('Comscan', function() {
 
     it('The highlight can be moved twice and the value there is 43', function() {
         iterator = testiteratorA();
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         hope = document.getElementById('listtable')
-        expect(iterator.getHighlightedNodeID()).toBe(43)
+        expect(iterator.getHighlightedItemID()).toBe(43)
     });
 
 
     it('The highlight can be moved six and the value there is 43 because it wraps around', function() {
         iterator = testiteratorA();
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
         hope = document.getElementById('listtable')
-        expect(iterator.getHighlightedNodeID()).toBe(43)
+        expect(iterator.getHighlightedItemID()).toBe(43)
     });
 
 
@@ -54,7 +54,7 @@ describe('Comscan', function() {
     it('the highlight outputs -thinking- speech each time it is moved', function() {
         iterator = testiteratorA();
         spyOn(window, "think");
-        iterator.move()
+        iterator.next()
         expect(think).toHaveBeenCalled();
         //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
     });
@@ -64,57 +64,57 @@ describe('Comscan', function() {
     it('calls the think function with the right argument each time it is moved', function() {
         iterator = testiteratorA();
         spyOn(window, "think");
-        iterator.move()
+        iterator.next()
         expect(think).toHaveBeenCalledWith("Happy");
     });
 
 
     it('activating the third button takes us to a new page starting with 99', function() {
         iterator = testiteratorA();
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        expect(iterator.getHighlightedNodeID()).toBe(99)
+        expect(iterator.getHighlightedItemID()).toBe(99)
     });
 
 
     it('The back button takes us to the start from the second level', function() {
         iterator = testiteratorA();
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        iterator.move()
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        expect(iterator.getHighlightedNodeID()).toBe(4)
+        expect(iterator.getHighlightedItemID()).toBe(4)
     });
 
 
     it('sucessfully deals with three level graphs', function() {
         iterator = testiteratorA();
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        expect(iterator.getHighlightedNodeID()).toBe(29)
+        expect(iterator.getHighlightedItemID()).toBe(29)
     });
 
     it('The back button takes us to the second level from the third', function() {
         iterator = testiteratorA();
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        iterator.move()
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
+        iterator.next()
         iterator.activate()
-        expect(iterator.getHighlightedNodeID()).toBe(99)
+        expect(iterator.getHighlightedItemID()).toBe(99)
     });
 
 
@@ -123,7 +123,7 @@ describe('Comscan', function() {
     //////////////////////////////////////////////////////////////////////////////////
     it('The iterator, loaded with test values, shoudl have an initial highlight value of 4', function() {
         iterator = getCK12iterator();
-        expect(iterator.getHighlightedNode().utterance).toBe("Yes");
+        expect(iterator.getHighlightedItem().utterance).toBe("Yes");
     });
 
 
@@ -131,9 +131,6 @@ describe('Comscan', function() {
     it('The CK12 iterator has been loaded in a raw state', function() {
         expect("Grid" in CK12Raw).toBe(true);
     });
-
-
-    //here
 
     it('The html table has -care- in it', function() {
         iterator = getCK12iterator();
@@ -145,22 +142,22 @@ describe('Comscan', function() {
 
     it('The highlight can be moved twice and the value there is Questions', function() {
         iterator = getCK12iterator();
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
         hope = document.getElementById('listtable')
-        expect(iterator.getHighlightedNodeLabel()).toBe("Questions")
+        expect(iterator.getHighlightedItemLabel()).toBe("Questions")
     });
 
 
     it('The highlight can be wrapped around for CK12', function() {
         iterator = getCK12iterator();
         for (j = 0; j < 14; j++) {
-            iterator.move()
+            iterator.next()
         }
         hope = document.getElementById('listtable')
-        expect(iterator.getHighlightedNodeLabel()).toBe("Yes")
+        expect(iterator.getHighlightedItemLabel()).toBe("Yes")
     });
 
 
@@ -169,11 +166,11 @@ describe('Comscan', function() {
     it('Testing CK12 link to action words', function() {
         var iterator = getCK12iterator();
         goToActionWords(iterator)
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        expect(iterator.getHighlightedNodeLabel()).toBe("go")
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        expect(iterator.getHighlightedItemLabel()).toBe("go")
     });
 
 
@@ -183,18 +180,18 @@ describe('Comscan', function() {
 
         //go to action words
         for (j = 0; j < 15; j++) {
-            iterator.move()
+            iterator.next()
         }
 
         iterator.activate() //go back
-        iterator.move() //move to somewhere we can tell where we are
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        expect(iterator.getHighlightedNodeLabel()).toBe("Action words")
+        iterator.next() //move to somewhere we can tell where we are
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        expect(iterator.getHighlightedItemLabel()).toBe("Action words")
     });
 
 
@@ -203,21 +200,21 @@ describe('Comscan', function() {
     it('sucessfully takes us from the third level to the second.', function() {
         iterator = getCK12iterator();
         goToMoreActionWords(iterator)
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        expect(iterator.getHighlightedNodeLabel()).toBe("play") //which is on the third level.
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        expect(iterator.getHighlightedItemLabel()).toBe("play") //which is on the third level.
         for (j = 0; j < 11; j++) {
-            iterator.move()
+            iterator.next()
         }
         iterator.activate() //back
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        iterator.move()
-        expect(iterator.getHighlightedNodeLabel()).toBe("want")
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        expect(iterator.getHighlightedItemLabel()).toBe("want")
 
     });
 
@@ -253,6 +250,21 @@ describe('Comscan', function() {
 
         //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
     });
+
+
+
+ it('The label is spoken when a highlighted item with a specified utterance is activated. ', function() {
+        iterator = testiteratorA();
+        spyOn(window, "say");
+	iterator.next()
+	iterator.next()
+	iterator.next()
+	iterator.activate()
+	expect(say).toHaveBeenCalledWith("Frederick is one of the characters in Sound of music");
+
+        //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
+    });
+
 
 
 function testiteratorA() {
@@ -306,7 +318,7 @@ function parseOVFPage(singlePage) {
 
 function goToActionWords(it) {
     for (j = 0; j < 7; j++) {
-        it.move()
+        it.next()
     }
     it.activate()
     console.log(it.currentNode)
@@ -319,9 +331,8 @@ function goToMoreActionWords(ite) {
     console.log(ite.currentNode)
     j = 0;
     for (j = 0; j < 14; j++) {
-        ite.move()
+        ite.next()
     }
-    console.log(ite.getHighlightedNodeLabel())
     ite.activate() //more action words
-    console.log(ite.getHighlightedNodeLabel())
+    console.log(ite.getHighlightedItemLabel())
 }

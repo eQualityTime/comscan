@@ -20,7 +20,6 @@ function voiceOutput(message,inVoice){
 	var utterance = new SpeechSynthesisUtterance(message);
 	if (utterance.voice == null){
 		utterance.voice=speech_voices.filter(function(voice) { return voice.name == inVoice; })[0];
-		console.log(utterance.voice)
 	}
 	window.speechSynthesis.speak(utterance);
     }
@@ -42,15 +41,15 @@ function PagesIterator(targetGraph) {
     this.currentNode = this.graph[this.rootNodeID]
     this.backStack = []; //stores breadcrumbs to work a multi-level 'back' button. 
 
-    this.getHighlightedNode = function() {
-        return this.currentNode[this.childIndex]; //returns a list of MenuItem objects
+    this.getHighlightedItem = function() {
+        return this.currentNode[this.childIndex]; //returns a MenuItem
     }
-    this.getHighlightedNodeLabel = function() {
-        return this.getHighlightedNode().label;
+    this.getHighlightedItemLabel = function() {
+        return this.getHighlightedItem().label;
     };
 
-    this.getHighlightedNodeID = function() {
-        return this.getHighlightedNode().id;
+    this.getHighlightedItemID = function() {
+        return this.getHighlightedItem().id;
     };
 
 
@@ -66,7 +65,7 @@ function PagesIterator(targetGraph) {
         }
     }
 
-    this.move = function() {
+    this.next = function() {
         this.childIndex++;
         if (this.childIndex == this.currentNode.length) {
             this.childIndex = 0;
@@ -96,9 +95,9 @@ function PagesIterator(targetGraph) {
 
 
     this.activate = function() {
-        var dest = this.getHighlightedNode().link
+        var dest = this.getHighlightedItem().link
 	if (dest==""){//then it's a speech activatation
-		say(this.getHighlightedNode().utterance)
+		say(this.getHighlightedItem().utterance)
 			return
 }
         if (dest in this.graph) {

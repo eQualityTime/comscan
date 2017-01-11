@@ -33,7 +33,7 @@ module.exports = function(config) {
       '**/*.js': ['coverage']
     },
 
-//    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage'],
 
 
     // test results reporter to use
