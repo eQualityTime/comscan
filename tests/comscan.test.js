@@ -51,11 +51,11 @@ describe('Comscan', function() {
 
 
 
-    it('the highlight calls a speech function each time it is moved', function() {
+    it('the highlight outputs -thinking- speech each time it is moved', function() {
         iterator = testiteratorA();
-        spyOn(window, "say");
+        spyOn(window, "think");
         iterator.move()
-        expect(say).toHaveBeenCalled();
+        expect(think).toHaveBeenCalled();
         //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
     });
 
@@ -252,9 +252,21 @@ describe('Comscan', function() {
 
 });
 
+
+
+ it('The label is spoken when a highlighted item with NO utterance is activated. ', function() {
+        iterator = testiteratorA();
+        spyOn(window, "say");
+	iterator.activate()
+	expect(say).toHaveBeenCalledWith("Bashful");
+
+        //learned this at http://www.htmlgoodies.com/html5/javascript/spy-on-javascript-methods-using-the-jasmine-testing-framework.html#fbid=KJtVgELupgs
+    });
+
+
 function testiteratorA() {
     pagesGraph = {
-        0: [new MenuItem(4, "Bashful", "", "Bashful"), new MenuItem(5, "Happy", "", "Happy"), new MenuItem(43, "Animals", "A", "Animals"), new MenuItem(8, "Frederick", "", "Frederick")],
+        0: [new MenuItem(4, "Bashful", ""), new MenuItem(5, "Happy", "", "Happy"), new MenuItem(43, "Animals", "A", "Animals"), new MenuItem(8, "Frederick", "", "Frederick is one of the characters in Sound of music")],
         "A": [new MenuItem(99, "Apple", "", "Apple"), new MenuItem(2, "Ant", "", "Ant"), new MenuItem(6, "B page", "B", "B page"), new MenuItem(22, "Back", "ovf(back())", "")],
         "B": [new MenuItem(29, "Baby", "", "Baby"), new MenuItem(22, "Bot", "", "Bot"), new MenuItem(26, "Boat", "", "Boat"), new MenuItem(21, "Back", "ovf(back())", "")]
     }

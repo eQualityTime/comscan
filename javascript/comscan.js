@@ -1,10 +1,18 @@
 window.comscan = window.comscan || {};
 
+
+function think(message){
+	voiceOutput(message,"Fiona")
+}
+
 function say(message) {
-    //alert("say what you want!")//stup
+	voiceOutput(message,"Daniel")
+}
+
+function voiceOutput(message,voice){
 	var utterance = new SpeechSynthesisUtterance(message);
 	if (utterance.voice == null){
-		utterance.voice=speechSynthesis.getVoices().filter(function(voice) { return voice.name == "Daniel"; })[0];
+		utterance.voice=speechSynthesis.getVoices().filter(function(voice) { return voice.name == voice; })[0];
 	}
 	window.speechSynthesis.speak(utterance);
     }
@@ -63,8 +71,6 @@ function PagesIterator(targetGraph) {
         this.currentNode = this.graph[dest]
         this.childIndex = 0; //start the new page at the begining
         this.refreshHTML() //new page
-
-
     }
 
     this.processOVF = function(dest) {
@@ -83,6 +89,10 @@ function PagesIterator(targetGraph) {
 
     this.activate = function() {
         var dest = this.getHighlightedNode().link
+	if (dest==""){//then it's a speech activatation
+		say(this.getHighlightedNode().utterance)
+			return
+}
         if (dest in this.graph) {
             this.jump(dest)
             this.backStack.push(dest)
