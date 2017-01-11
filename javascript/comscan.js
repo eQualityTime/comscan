@@ -1,5 +1,12 @@
 window.comscan = window.comscan || {};
 
+var speech_voices;
+if ('speechSynthesis' in window) {
+  speech_voices = window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = function() {
+    speech_voices = window.speechSynthesis.getVoices();
+  };
+}
 
 function think(message){
 	voiceOutput(message,"Fiona")
@@ -9,10 +16,11 @@ function say(message) {
 	voiceOutput(message,"Daniel")
 }
 
-function voiceOutput(message,voice){
+function voiceOutput(message,inVoice){
 	var utterance = new SpeechSynthesisUtterance(message);
 	if (utterance.voice == null){
-		utterance.voice=speechSynthesis.getVoices().filter(function(voice) { return voice.name == voice; })[0];
+		utterance.voice=speech_voices.filter(function(voice) { return voice.name == inVoice; })[0];
+		console.log(utterance.voice)
 	}
 	window.speechSynthesis.speak(utterance);
     }
