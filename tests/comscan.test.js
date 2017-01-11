@@ -152,12 +152,10 @@ describe('Comscan', function() {
     });
 
 
-    it('The highlight can be moved six and the value there is 43 because it wraps around', function() {
+    it('The highlight can be wrapped around for CK12', function() {
         iterator = getCK12iterator();
-	for(i=0;i<4;i++){
-		for(j=0;j<4;j++){
+	for(j=0;j<14;j++){
         iterator.move()
-	}
 	}
         hope = document.getElementById('listtable')
         expect(iterator.getHighlightedNodeLabel()).toBe("Yes")
@@ -190,10 +188,8 @@ describe('Comscan', function() {
         iterator.move()
         iterator.move()
         iterator.activate()//go to action words
-	for(i=0;i<4;i++){
-		for(j=0;j<4;j++){
+		for(j=0;j<15;j++){
         iterator.move()
-	}
 	}
 
       iterator.activate()//go back
@@ -233,16 +229,18 @@ it('sucessfully takes us from the third level to the second.', function() {
 	pagesGraph=iterator.graph;
 	gap=false
 	for (pageID in pagesGraph){
-		console.log("Key is "+pageID)
-		console.log(pagesGraph[pageID])
+	//	console.log("Key is "+pageID)
+		//console.log(pagesGraph[pageID])
 		for (item in pagesGraph[pageID]){
-		if (pagesGraph[pageID][item].label=="")
+//		console.log(pagesGraph[pageID][item].label)
+		if (pagesGraph[pageID][item].label==""){
+			console.log("XXXXXXXXXXXXXXXXXXXX")
 			gap=true	
 		}
 	} 
+}
         expect(gap).toBe(false)
     });
-
 
 
 });
@@ -286,6 +284,8 @@ var i=0
 var j=0
 for(i=0;i<4;i++){
 	for(j=0;j<4;j++){
+		if(singlePage[1][i][j]=="")
+			continue
 		itemList.push(new MenuItem(i+j,singlePage[1][i][j],singlePage[3][i][j],singlePage[1][i][j]))
 
 	}
