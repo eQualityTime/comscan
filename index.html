@@ -3,10 +3,49 @@
 <head>
 <title>ComScan</title>
 <script language="javascript" src="javascript/comscan.js"></script>
+<script language="javascript" src="tests/CK12.js"></script>
 <body>
 <table id="listtable">
 <script>
 
+
+function getCK12iterator(){
+//console.log("Enter CK12 parse function")
+//starting with CK12Raw, we're going to build outselves a iterator. 
+pagesGraph={}
+console.log(Object.keys(CK12Raw['Grid']).length)
+singlepage=CK12Raw['Grid']["0"]
+pagename=singlepage[0]
+pagesGraph[pagename]=parseOVFPage(singlepage)
+for (i =1;i<Object.keys(CK12Raw['Grid']).length;i++){
+	singlepage=CK12Raw['Grid'][""+i]
+	pagename=singlepage[0]
+	thing=parseOVFPage(singlepage)
+	thing.push(new MenuItem(21,"back","ovf(back())",""))
+	pagesGraph[pagename]=thing 
+}
+
+iterator=new PagesIterator(pagesGraph)
+iterator.rootNodeID="toppage"
+iterator.currentNode = iterator.graph["toppage"] 
+return iterator
+
+}
+
+function parseOVFPage(singlePage){
+//console.log("in single page parse")
+itemList=[];
+var i=0
+var j=0
+for(i=0;i<4;i++){
+	for(j=0;j<4;j++){
+		itemList.push(new MenuItem(i+j,singlePage[1][i][j],singlePage[3][i][j],singlePage[1][i][j]))
+
+	}
+}
+return itemList
+
+}
 
 
     pagesGraph = {
@@ -15,7 +54,7 @@
         "B": [new MenuItem(29, "Baby", "", "Baby"), new MenuItem(22, "Bot", "", "Bot"), new MenuItem(26, "Boat", "", "Boat"), new MenuItem(21,"Back","ovf(back())", "")]
     }
 
-board= new PagesIterator(pagesGraph);
+board= getCK12iterator()
 
 
 board.refreshHTML();

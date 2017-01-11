@@ -228,6 +228,22 @@ it('sucessfully takes us from the third level to the second.', function() {
   });
 
 
+   it('has NO gaps in the dictionary.', function() {
+        iterator = getCK12iterator();
+	pagesGraph=iterator.graph;
+	gap=false
+	for (pageID in pagesGraph){
+		console.log("Key is "+pageID)
+		console.log(pagesGraph[pageID])
+		for (item in pagesGraph[pageID]){
+		if (pagesGraph[pageID][item].label=="")
+			gap=true	
+		}
+	} 
+        expect(gap).toBe(false)
+    });
+
+
 
 });
 
