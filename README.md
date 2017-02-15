@@ -11,14 +11,20 @@ There is a gh-page branch with an example - view it [here](https://equalitytime.
 
 
 
-## Tests
+# Tests
+My commands for starting the testing after cloning the repo were: 
 
-Describe and show how to run the tests with code examples.
+```
+36601  04/02/17 11:21:18 npm install karma --save-dev
+36602  04/02/17 11:21:56 karma init my.conf.js
+36614  04/02/17 11:30:02 karma start my.conf.js
+
+```
 
 ## Contributors
 
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
+All welcome! 
 
 ## License
 
-A short snippet describing the license (MIT, Apache, etc.)
+As per file 
