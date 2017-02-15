@@ -219,6 +219,24 @@ describe('Comscan', function() {
     });
 
 
+  it('returns us to the start after a utterance has been chosen. ', function() {
+        iterator = getCK12iterator();
+        goToMoreActionWords(iterator)
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        expect(iterator.getHighlightedItemLabel()).toBe("play") //which is on the third level.
+        iterator.activate()//so it say's "Play" 
+        iterator.next()
+        iterator.next()
+        iterator.next()
+        expect(iterator.getHighlightedItemLabel()).toBe("Chatting")
+
+    });
+
+
+
     it('has NO gaps in the dictionary.', function() {
         iterator = getCK12iterator();
         pagesGraph = iterator.graph;

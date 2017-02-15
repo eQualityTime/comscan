@@ -98,6 +98,9 @@ function PagesIterator(targetGraph) {
         var dest = this.getHighlightedItem().link
         if (dest == "") { //then it's a speech activatation
             say(this.getHighlightedItem().utterance)
+            this.currentNode = this.graph[this.rootNodeID];
+	    this.childIndex=0
+            this.backStack = []; 
             return
         }
         if (dest in this.graph) {
